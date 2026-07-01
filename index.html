@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso de Emergencias Sanitarias</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>🚑 Repaso de Emergencias Sanitarias</h1>
+
+        <div id="instructions" class="card">
+            <h2>Instrucciones</h2>
+            <p>
+                Responde a las 20 preguntas del cuestionario.
+                Verás inmediatamente si tu respuesta es correcta o incorrecta
+                y podrás continuar pulsando el botón "Siguiente pregunta".
+            </p>
+
+            <button id="start-btn">Comenzar actividad</button>
+        </div>
+
+        <div id="quiz" class="card hidden">
+
+            <p id="progress"></p>
+
+            <h2 id="question"></h2>
+
+            <div id="answers"></div>
+
+            <div id="feedback"></div>
+
+            <button id="next-btn" class="hidden">
+                Siguiente pregunta
+            </button>
+
+        </div>
+
+        <div id="result" class="card hidden"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
