@@ -168,3 +168,5 @@ La actividad se considera funcional cuando:
 ## Autoría
 
 Actividad educativa desarrollada por Edurne Jiménez para el repaso de contenidos del Ciclo Formativo de Grado Medio en Emergencias Sanitarias.
+
+Última actualización: julio 2026.
