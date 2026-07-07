@@ -183,13 +183,19 @@ button:hover {
 .progress-wrapper {
     margin: 0 auto 20px;
     max-width: 700px;
+    position: relative;
+    overflow: visible;
 }
 
 .progress-label {
     text-align: center;
     color: #00695c;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin: 12px 0 0;
+}
+
+.progress-label.under-question {
+    margin-top: 14px;
 }
 
 .progress-track {
@@ -199,26 +205,26 @@ button:hover {
     background-color: #dcefe8;
     overflow: hidden;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.08);
+    z-index: 1;
 }
 
 .progress-icon-start,
 .progress-icon-end {
     position: absolute;
     top: 50%;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     z-index: 4;
-    transition: left 0.3s ease;
     pointer-events: none;
 }
 
 .progress-icon-start {
-    left: 0%;
-    transform: translate(-50%, -50%);
+    left: -6px;
+    transform: translateY(-50%);
 }
 
 .progress-icon-end {
-    left: 100%;
-    transform: translate(-50%, -50%);
+    right: -6px;
+    transform: translateY(-50%);
 }
 
 .progress-fill {
@@ -237,12 +243,13 @@ button:hover {
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translate(-50%, -50%);
-    font-size: 1.3rem;
-    transition: left 0.3s ease;
+    transform: translate(-50%, -50%) rotateY(180deg);
+    font-size: 1.4rem;
+    transition: left 0.3s ease, transform 0.3s ease;
     filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
-    z-index: 5;
+    z-index: 6;
     pointer-events: none;
+    will-change: left, transform;
 }
 
 @keyframes fadeIn {

@@ -249,6 +249,7 @@ function startQuiz() {
     instructions.classList.add("hidden");
     quiz.classList.remove("hidden");
     progressBarWrapper.classList.remove("hidden");
+    progressLabel.classList.remove("hidden");
     showQuestion();
 }
 
@@ -332,6 +333,7 @@ function showResults() {
 
     quiz.classList.add("hidden");
     progressBarWrapper.classList.add("hidden");
+    progressLabel.classList.add("hidden");
     resultElement.classList.remove("hidden");
 
     let message = "";
