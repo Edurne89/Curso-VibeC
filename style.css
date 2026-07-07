@@ -200,6 +200,38 @@ button:hover {
     margin-top: 14px;
 }
 
+.timer {
+    text-align: center;
+    background: rgba(0,0,0,0.06);
+    color: #081f26;
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    width: 110px;
+    margin: 0 auto 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.timer.warn {
+    background: #fff3e0;
+    color: #bf360c;
+    box-shadow: 0 6px 18px rgba(191,54,12,0.12);
+    animation: pulse 1.2s infinite;
+}
+
+.time-warning {
+    text-align: center;
+    color: #bf360c;
+    font-weight: 700;
+    margin: 6px auto 12px;
+}
+
+@keyframes pulse {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+}
+
 .progress-track {
     position: relative;
     height: 12px;

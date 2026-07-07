@@ -243,6 +243,12 @@ const progressBarWrapper = document.getElementById("progress-bar-wrapper");
 const progressLabel = document.getElementById("progress-label");
 const progressFill = document.getElementById("progress-fill");
 const progressAmbulance = document.getElementById("progress-ambulance");
+const timerElement = document.getElementById("timer");
+
+// Timer: 14 minutes (in seconds)
+const TIMER_DURATION = 14 * 60;
+let timerRemaining = TIMER_DURATION;
+let timerInterval = null;
 
 startBtn.addEventListener("click", startQuiz);
 
@@ -251,7 +257,120 @@ function startQuiz() {
     quiz.classList.remove("hidden");
     progressBarWrapper.classList.remove("hidden");
     progressLabel.classList.remove("hidden");
+    // iniciar temporizador y pregunta
+    resetTimer();
+    startTimer();
     showQuestion();
+}
+
+function resetTimer() {
+    clearInterval(timerInterval);
+    timerRemaining = TIMER_DURATION;
+    if (timerElement) {
+        timerElement.textContent = formatTime(timerRemaining);
+        timerElement.classList.remove('hidden');
+    }
+}
+
+function startTimer() {
+    if (!timerElement) return;
+    clearInterval(timerInterval);
+    timerElement.classList.remove('hidden');
+    timerInterval = setInterval(() => {
+        timerRemaining--;
+        if (timerRemaining < 0) {
+            clearInterval(timerInterval);
+            timeExpired();
+            return;
+        }
+        timerElement.textContent = formatTime(timerRemaining);
+        // aviso a 2 minutos
+        if (timerRemaining === 120) {
+            triggerTwoMinuteWarning();
+        }
+    }, 1000);
+}
+
+function triggerTwoMinuteWarning() {
+    if (!timerElement) return;
+    timerElement.classList.add('warn');
+    // add visual warning beneath timer if not present
+    if (!document.getElementById('time-warning')) {
+        const warn = document.createElement('div');
+        warn.id = 'time-warning';
+        warn.className = 'time-warning';
+        warn.setAttribute('role', 'alert');
+        warn.textContent = 'Quedan 2 minutos';
+        // insert after timer
+        timerElement.parentNode.insertBefore(warn, progressBarWrapper);
+    }
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    if (timerElement) timerElement.classList.add('hidden');
+}
+
+function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function timeExpired() {
+    // detener y mostrar mensaje de fracaso
+    stopTimer();
+    const buttons = document.querySelectorAll('.answer-btn');
+    buttons.forEach(b => b.disabled = true);
+    nextBtn.classList.add('hidden');
+
+    quiz.classList.add('hidden');
+    progressBarWrapper.classList.add('hidden');
+    progressLabel.classList.add('hidden');
+
+    resultElement.classList.remove('hidden');
+    resultElement.innerHTML = `
+        <h2>Tiempo agotado</h2>
+        <p>⛑️ No has llegado al hospital — vuelve a intentarlo.</p>
+        <button id="restart-btn">Reiniciar actividad</button>
+    `;
+
+    document.getElementById('restart-btn').addEventListener('click', () => resetActivity());
+}
+
+function resetActivity() {
+    // stop timer and clear intervals
+    stopTimer();
+    clearInterval(timerInterval);
+
+    // reset state
+    currentQuestion = 0;
+    score = 0;
+    lastAnswerCorrect = false;
+
+    // reset UI
+    progressFill.style.width = `0%`;
+    progressAmbulance.style.left = `0%`;
+    feedbackElement.textContent = '';
+    answersElement.innerHTML = '';
+
+    // hide quiz/result and show instructions
+    quiz.classList.add('hidden');
+    resultElement.classList.add('hidden');
+    instructions.classList.remove('hidden');
+
+    // hide progress and timer
+    progressBarWrapper.classList.add('hidden');
+    progressLabel.classList.add('hidden');
+    if (timerElement) {
+        timerElement.classList.add('hidden');
+        timerElement.classList.remove('warn');
+        timerElement.textContent = formatTime(TIMER_DURATION);
+    }
+
+    // remove any time warning element
+    const warn = document.getElementById('time-warning');
+    if (warn && warn.parentNode) warn.parentNode.removeChild(warn);
 }
 
 function showQuestion() {
@@ -326,6 +445,7 @@ nextBtn.addEventListener("click", () => {
 
 function showResults() {
 
+    stopTimer();
     quiz.classList.add("hidden");
     progressBarWrapper.classList.add("hidden");
     progressLabel.classList.add("hidden");
@@ -352,5 +472,5 @@ function showResults() {
 
     document
         .getElementById("restart-btn")
-        .addEventListener("click", () => location.reload());
+        .addEventListener("click", () => resetActivity());
 }
