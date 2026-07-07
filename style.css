@@ -159,11 +159,11 @@ button:hover {
 }
 
 .correct {
-    background-color: #c8e6c9 !important;
+    background-color: #55e45a !important;
 }
 
 .incorrect {
-    background-color: #ffcdd2 !important;
+    background-color: #c30215 !important;
 }
 
 @media (max-width: 600px) {
