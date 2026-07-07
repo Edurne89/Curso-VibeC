@@ -204,20 +204,21 @@ button:hover {
 .progress-icon-start,
 .progress-icon-end {
     position: absolute;
-    top: -18px;
-    font-size: 1.05rem;
+    top: 50%;
+    font-size: 1.1rem;
     z-index: 4;
     transition: left 0.3s ease;
+    pointer-events: none;
 }
 
 .progress-icon-start {
-    left: 0;
-    transform: translateX(-50%);
+    left: 0%;
+    transform: translate(-50%, -50%);
 }
 
 .progress-icon-end {
     left: 100%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
 }
 
 .progress-fill {
@@ -234,13 +235,14 @@ button:hover {
 
 .progress-ambulance {
     position: absolute;
-    top: -16px;
+    top: 50%;
     left: 0;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     font-size: 1.3rem;
     transition: left 0.3s ease;
     filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
     z-index: 5;
+    pointer-events: none;
 }
 
 @keyframes fadeIn {
