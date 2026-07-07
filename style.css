@@ -201,6 +201,25 @@ button:hover {
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.08);
 }
 
+.progress-icon-start,
+.progress-icon-end {
+    position: absolute;
+    top: -18px;
+    font-size: 1.05rem;
+    z-index: 4;
+    transition: left 0.3s ease;
+}
+
+.progress-icon-start {
+    left: 0;
+    transform: translateX(-50%);
+}
+
+.progress-icon-end {
+    left: 100%;
+    transform: translateX(-50%);
+}
+
 .progress-fill {
     position: absolute;
     top: 0;
@@ -210,6 +229,7 @@ button:hover {
     border-radius: 999px;
     background: linear-gradient(90deg, #00897b, #4db6ac);
     transition: width 0.3s ease;
+    z-index: 1;
 }
 
 .progress-ambulance {
@@ -220,6 +240,7 @@ button:hover {
     font-size: 1.3rem;
     transition: left 0.3s ease;
     filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+    z-index: 5;
 }
 
 @keyframes fadeIn {
