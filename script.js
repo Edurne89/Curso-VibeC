@@ -229,6 +229,7 @@ const questions = [
 
 let currentQuestion = 0;
 let score = 0;
+let lastAnswerCorrect = false;
 
 const startBtn = document.getElementById("start-btn");
 const instructions = document.getElementById("instructions");
@@ -291,33 +292,28 @@ function showQuestion() {
 function selectAnswer(selectedIndex) {
 
     const question = questions[currentQuestion];
-
     const buttons = document.querySelectorAll(".answer-btn");
 
-    buttons.forEach(btn => btn.disabled = true);
-
     if (selectedIndex === question.answer) {
-
         score++;
-
+        lastAnswerCorrect = true;
+        buttons.forEach(btn => btn.disabled = true);
         buttons[selectedIndex].classList.add("correct");
-
         feedbackElement.textContent = "✅ Correcto";
-
+        nextBtn.textContent = "Siguiente pregunta";
+        nextBtn.classList.remove("hidden");
     } else {
-
+        lastAnswerCorrect = false;
         buttons[selectedIndex].classList.add("incorrect");
-
-        buttons[question.answer].classList.add("correct");
-
-        feedbackElement.textContent =
-            `❌ Incorrecto. Respuesta correcta: ${question.options[question.answer]}`;
+        feedbackElement.textContent = "❌ Incorrecto. Vuelve a intentarlo.";
+        nextBtn.classList.add("hidden");
     }
-
-    nextBtn.classList.remove("hidden");
 }
 
 nextBtn.addEventListener("click", () => {
+    if (!lastAnswerCorrect) {
+        return;
+    }
 
     currentQuestion++;
 
@@ -326,7 +322,6 @@ nextBtn.addEventListener("click", () => {
     } else {
         showResults();
     }
-
 });
 
 function showResults() {
