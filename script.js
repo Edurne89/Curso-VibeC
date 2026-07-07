@@ -236,15 +236,19 @@ const quiz = document.getElementById("quiz");
 const questionElement = document.getElementById("question");
 const answersElement = document.getElementById("answers");
 const feedbackElement = document.getElementById("feedback");
-const progressElement = document.getElementById("progress");
 const nextBtn = document.getElementById("next-btn");
 const resultElement = document.getElementById("result");
+const progressBarWrapper = document.getElementById("progress-bar-wrapper");
+const progressLabel = document.getElementById("progress-label");
+const progressFill = document.getElementById("progress-fill");
+const progressAmbulance = document.getElementById("progress-ambulance");
 
 startBtn.addEventListener("click", startQuiz);
 
 function startQuiz() {
     instructions.classList.add("hidden");
     quiz.classList.remove("hidden");
+    progressBarWrapper.classList.remove("hidden");
     showQuestion();
 }
 
@@ -252,8 +256,14 @@ function showQuestion() {
 
     const question = questions[currentQuestion];
 
-    progressElement.textContent =
-        `Pregunta ${currentQuestion + 1} de ${questions.length}`;
+    const totalQuestions = questions.length;
+    const progressPercent = totalQuestions > 1
+        ? (currentQuestion / (totalQuestions - 1)) * 100
+        : 0;
+
+    progressLabel.textContent = `Pregunta ${currentQuestion + 1} de ${totalQuestions}`;
+    progressFill.style.width = `${progressPercent}%`;
+    progressAmbulance.style.left = `${progressPercent}%`;
 
     questionElement.textContent = question.question;
 
@@ -321,6 +331,7 @@ nextBtn.addEventListener("click", () => {
 function showResults() {
 
     quiz.classList.add("hidden");
+    progressBarWrapper.classList.add("hidden");
     resultElement.classList.remove("hidden");
 
     let message = "";
