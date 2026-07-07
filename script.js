@@ -65,7 +65,7 @@ const questions = [
             "Quirúrgica",
             "FFP2"
         ],
-        answer: 1
+        answer: 1,
     },
 
     {
@@ -262,12 +262,13 @@ function showQuestion() {
 
     nextBtn.classList.add("hidden");
 
+    const letters = ["A", "B", "C", "D"];
+
     question.options.forEach((option, index) => {
 
         const button = document.createElement("button");
-
-        button.textContent = option;
-        button.classList.add("answer-btn");
+        button.classList.add("answer-btn", `option-${letters[index].toLowerCase()}`);
+        button.innerHTML = `<span class="option-letter">${letters[index]}</span><span>${option}</span>`;
 
         button.addEventListener("click", () => selectAnswer(index));
 
