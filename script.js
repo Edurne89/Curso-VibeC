@@ -284,9 +284,15 @@ function startTimer() {
             return;
         }
         timerElement.textContent = formatTime(timerRemaining);
-        // aviso a 2 minutos
+
         if (timerRemaining === 120) {
             triggerTwoMinuteWarning();
+        }
+
+        if (timerRemaining <= 10) {
+            timerElement.classList.add('ending');
+        } else {
+            timerElement.classList.remove('ending');
         }
     }, 1000);
 }
@@ -308,7 +314,12 @@ function triggerTwoMinuteWarning() {
 
 function stopTimer() {
     clearInterval(timerInterval);
-    if (timerElement) timerElement.classList.add('hidden');
+    if (timerElement) {
+        timerElement.classList.add('hidden');
+        timerElement.classList.remove('warn', 'ending');
+    }
+    const warn = document.getElementById('time-warning');
+    if (warn && warn.parentNode) warn.parentNode.removeChild(warn);
 }
 
 function formatTime(sec) {
@@ -320,6 +331,8 @@ function formatTime(sec) {
 function timeExpired() {
     // detener y mostrar mensaje de fracaso
     stopTimer();
+    const warn = document.getElementById('time-warning');
+    if (warn && warn.parentNode) warn.parentNode.removeChild(warn);
     const buttons = document.querySelectorAll('.answer-btn');
     buttons.forEach(b => b.disabled = true);
     nextBtn.classList.add('hidden');

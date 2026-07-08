@@ -217,6 +217,32 @@ button:hover {
     box-shadow: 0 4px 10px rgba(0,0,0,0.06);
 }
 
+.timer.warn {
+    background: #fff0f0;
+    color: #c62828;
+    border: 1px solid #c62828;
+}
+
+.timer.ending {
+    animation: timerPulse 0.8s ease-in-out infinite alternate;
+}
+
+.time-warning {
+    text-align: center;
+    color: #c62828;
+    font-weight: 700;
+    margin: 10px auto 0;
+}
+
+@keyframes timerPulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.08);
+    }
+}
+
 .progress-track {
     position: relative;
     height: 12px;
