@@ -34,17 +34,22 @@ body {
 
 .site-header h1 {
     margin: 0;
-    color: #000000;
+    color: #c14c29;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     padding-top: 6px;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
 }
 
 .ambulance-icon {
-    font-size: 1.4rem;
+    font-size: 2.4rem;
 }
 
 .container {
@@ -226,7 +231,7 @@ button:hover {
 .progress-icon-end {
     position: absolute;
     top: 50%;
-    font-size: 1.2rem;
+    font-size: 2rem;
     z-index: 4;
     pointer-events: none;
 }
@@ -258,7 +263,7 @@ button:hover {
     top: 50%;
     left: 0;
     transform: translate(-50%, -50%) rotateY(180deg);
-    font-size: 1.4rem;
+    font-size: 2.2rem;
     transition: left 0.3s ease, transform 0.3s ease;
     filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
     z-index: 6;
